@@ -207,7 +207,8 @@ Web
 
 **Get Atomic Time from Internet Clock** - This program will get the true atomic time from an atomic time clock on the Internet. Use any one of the atomic clocks returned by a simple Google search.
 
-**Fetch Current Weather** - Get the current weather for a given zip/postal code. *Optional: Try locating the user automatically.*
+**Fetch Current Weather**  - Get the current weather for a given zip/postal code. *Optional: Try locating the user automatically.*
+- [python](https://github.com/qwebnm7788/Projects/tree/master/python/currentWeather)
 
 **Scheduled Auto Login and Action** - Make an application which logs into a given site on a schedule and invokes a certain action and then logs out. This can be useful for checking web mail, posting regular content, or getting info for other applications and saving it to your computer.
 
