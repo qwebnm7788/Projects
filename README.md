@@ -209,6 +209,7 @@ Web
 
 **Fetch Current Weather**  - Get the current weather for a given zip/postal code. *Optional: Try locating the user automatically.*
 - [python](https://github.com/qwebnm7788/Projects/tree/master/python/currentWeather)
+- [java](https://github.com/qwebnm7788/Projects/tree/master/java/currentWeather)
 
 **Scheduled Auto Login and Action** - Make an application which logs into a given site on a schedule and invokes a certain action and then logs out. This can be useful for checking web mail, posting regular content, or getting info for other applications and saving it to your computer.
 
