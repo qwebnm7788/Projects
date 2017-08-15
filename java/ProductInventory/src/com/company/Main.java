@@ -1,15 +1,12 @@
 package com.company;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     //현재 java파일의 위치를 저장
-    public static final String currentDir = System.getProperty("user.dir");
-    //Manager들의 정보를 저장 (id는 유일하므로 Map에 저장)
-    public static Manager manager;
+    private static final String currentDir = System.getProperty("user.dir");
+    private static Manager manager;
 
     public static void main(String[] args) {
         System.out.println("=======================================================");
@@ -18,7 +15,7 @@ public class Main {
 
         while(true){
             Scanner in = new Scanner(System.in);
-            String id = "", password = "";
+            String id, password;
             String res;
             boolean start = false;
             try {
@@ -54,10 +51,13 @@ public class Main {
 
             //로그인된 Manager의 stock을 읽어온다.
             int select;
-            boolean logout = false;
-            while(!logout){
+            boolean quit = false;
+            boolean change = false;             //현재 manager의 내용에 변화가 있는지의 여부를 저장
+            while(!quit){
+                System.out.println();
                 System.out.println("====================================================================");
                 System.out.println("================================메뉴================================");
+                System.out.println();
                 System.out.println("1.  재고 목록 확인");
                 System.out.println("2.  재고 물건 추가");
                 System.out.println("3.  재고 내용 변경");
@@ -70,11 +70,15 @@ public class Main {
                         manager.listItems();
                         break;
                     case 2:
+                        change = true;
+                        manager.addItem();
                         break;
                     case 3:
+                        change = true;
+                        manager.updateItem();
                         break;
                     case 4:
-                        logout = true;
+                        quit = true;
                         break;
                     default:
                         System.out.println("잘못된 입력입니다.");
@@ -84,13 +88,20 @@ public class Main {
             res = in.nextLine();
             if(res.equals("Y") || res.equals("y")){
                 System.out.println("GOOD BYE");
+                if(change){
+                    if(logout()){
+                        System.out.println("change has been safely saved");
+                    }else{
+                        System.out.println("fail to save information");
+                    }
+                }
                 System.exit(0);
             }
         }
     }
 
     //정상적인 로그인 확인
-    public static boolean login(String id, String password) {
+    private static boolean login(String id, String password) {
         //id가 존재한다면 db폴더 내부에 id이름과 동일한 폴더가존재한다.
         String path = currentDir + "\\" + "db";
         File file = new File(path);
@@ -131,5 +142,10 @@ public class Main {
         }else{
             return false;
         }
+    }
+
+    //로그아웃시 지금까지 작업한 내용을 stocks.txt에 저장한다. (덮어쓰기 하는것이 좋을듯)
+    private static boolean logout(){
+        return manager.save();
     }
 }
